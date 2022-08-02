@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MAYD_Assignment</string>
+    <string name="let_s_get_started">Let\'s get started!</string>
+    <string name="paste_your_first_link_into_the_field_to_shorten_it">Paste your first link into the field to shorten it</string>
 </resources>
