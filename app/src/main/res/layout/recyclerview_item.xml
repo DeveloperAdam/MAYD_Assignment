@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvOriginalUrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/shortly_text_color"
+            android:textSize="@dimen/font_normal"
+            tools:text = "https://www.google.com"
+            android:ellipsize="end"
+            android:textStyle="bold"
+            android:padding="@dimen/card_inside_padding"
+            android:drawableEnd="@drawable/ic_del"/>
+        <View
+            android:id="@+id/lineSeprator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/hint_color"
+            android:layout_below="@+id/tvOriginalUrl"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvShortenUrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/shortly_btn_color"
+            tools:text = "https://www.google.com"
+            android:layout_below="@+id/lineSeprator"
+            android:textSize="@dimen/font_normal"
+            android:textStyle="bold"
+            android:padding="@dimen/card_inside_padding"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCopy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="@dimen/bold_text"
+            android:text="@string/copy"
+            android:layout_margin="@dimen/card_inside_padding"
+            android:background="@drawable/default_btn_bg"
+            android:layout_below="@+id/tvShortenUrl"/>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

@@ -3,10 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/default_btn_bg.xml" value="0.299" />
+        <entry key="app/src/main/res/drawable/edittext_default_bg.xml" value="0.299" />
+        <entry key="app/src/main/res/drawable/edittext_default_btn_bg.xml" value="0.299" />
+        <entry key="app/src/main/res/drawable/edittext_error_bg.xml" value="0.299" />
         <entry key="app/src/main/res/drawable/ic_illustration.xml" value="0.299" />
         <entry key="app/src/main/res/drawable/ic_logo.xml" value="0.299" />
         <entry key="app/src/main/res/drawable/ic_shape.xml" value="0.299" />
-        <entry key="app/src/main/res/layout/activity_shortly.xml" value="0.2509057971014493" />
+        <entry key="app/src/main/res/layout/activity_shortly.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/recyclerview_item.xml" value="0.28858486532706284" />
       </map>
     </option>
   </component>
