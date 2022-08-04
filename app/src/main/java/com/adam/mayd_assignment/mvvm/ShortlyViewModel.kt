@@ -27,10 +27,10 @@ class ShortlyViewModel @Inject constructor(
         get() = _mutableData
 
 
-    fun getShortUrl() {
+    fun getShortUrl(url: String) {
         viewModelScope.launch {
             fetchShortUrl {
-                repository.shortenUrl()
+                repository.shortenUrl(urlToShorten = url)
                     .flowOn(Dispatchers.IO)
             }
         }

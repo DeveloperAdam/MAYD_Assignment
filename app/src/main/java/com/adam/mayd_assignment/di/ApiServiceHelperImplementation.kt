@@ -1,4 +1,4 @@
-package com.adam.mayd_assignment.hilt
+package com.adam.mayd_assignment.di
 
 import com.adam.mayd_assignment.data.ShortlyDataModel
 import retrofit2.Response
@@ -11,5 +11,5 @@ class ApiServiceHelperImplementation @Inject constructor(
     @Named("APIServiceJSON") private val apiServiceJSON: RetrofitServiceInstance
 ) : ApiServiceHelper {
 
-    override suspend fun shortenUrl(): Response<ShortlyDataModel> = apiServiceJSON.shortenUrl()
+    override suspend fun shortenUrl(url : String): Response<ShortlyDataModel> = apiServiceJSON.shortenUrl(url)
 }

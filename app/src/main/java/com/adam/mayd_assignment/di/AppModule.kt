@@ -1,4 +1,4 @@
-package com.adam.mayd_assignment.hilt
+package com.adam.mayd_assignment.di
 
 import android.content.Context
 import com.adam.mayd_assignment.utils.MAYD_ApplicationClass

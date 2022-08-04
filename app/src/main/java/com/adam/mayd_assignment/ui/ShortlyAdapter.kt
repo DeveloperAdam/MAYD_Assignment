@@ -1,4 +1,4 @@
-package com.adam.mayd_assignment.adapters
+package com.adam.mayd_assignment.ui
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.adam.mayd_assignment.R
 import com.adam.mayd_assignment.data.ShortlyDataModel
-import com.adam.mayd_assignment.ui.ShortlyActivity
 
 class ShortlyAdapter(
    private val arrayListOfUrls: ArrayList<ShortlyDataModel>,

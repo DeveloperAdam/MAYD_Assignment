@@ -2,10 +2,11 @@ package com.adam.mayd_assignment.mvvm
 
 import com.adam.mayd_assignment.R
 import com.adam.mayd_assignment.data.ShortlyDataModel
-import com.adam.mayd_assignment.hilt.ApiServiceHelperImplementation
+import com.adam.mayd_assignment.di.ApiServiceHelperImplementation
 import com.adam.mayd_assignment.utils.DataState
 import com.adam.mayd_assignment.utils.MAYD_ApplicationClass
 import com.adam.mayd_assignment.utils.NetworkHelper
+import com.adam.mayd_assignment.utils.ShortlyConstants
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.net.HttpURLConnection
@@ -19,7 +20,7 @@ class ShortlyRepository @Inject constructor(
     private val apiServiceHelper: ApiServiceHelperImplementation
 ){
 
-    suspend fun shortenUrl() : Flow<DataState<ShortlyDataModel>> = flow {
+    suspend fun shortenUrl(urlToShorten :String) : Flow<DataState<ShortlyDataModel>> = flow {
         try {
 
             if (!networkHelper.hasActiveInternetConnection()) {
@@ -29,14 +30,20 @@ class ShortlyRepository @Inject constructor(
 
             //Initiate
             emit(DataState.Loading)
-            val response = apiServiceHelper.shortenUrl()
+            val url = "shorten?url=$urlToShorten"
+            val response = apiServiceHelper.shortenUrl(url)
+            if (response.isSuccessful){
+                when(response.code()) {
 
-            when(response.code()) {
+                    HttpURLConnection.HTTP_OK -> { emit(DataState.Success(response.body())) }
 
-                HttpURLConnection.HTTP_OK -> { emit(DataState.Success(response.body())) }
-
-                HttpURLConnection.HTTP_INTERNAL_ERROR -> emit(DataState.Error(context.getString(R.string.generic_error)))
+                    HttpURLConnection.HTTP_INTERNAL_ERROR -> emit(DataState.Error(context.getString(R.string.generic_error)))
+                    else ->{
+                        emit(DataState.Error(response.message() ?: context.getString(R.string.generic_error)))
+                    }
+                }
             }
+
         }
         catch (e: Exception)
         {
