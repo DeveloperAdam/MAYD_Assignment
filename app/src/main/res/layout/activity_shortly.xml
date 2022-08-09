@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
     tools:context=".ui.ShortlyActivity">
 
 
@@ -23,7 +24,7 @@
                 android:id="@+id/layoutIntroduction"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintTop_toTopOf="parent">
 
 
@@ -76,36 +77,45 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvHeading" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layoutHistory"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:background="@color/shortly_history_screen_bg"
-                android:padding="@dimen/common_edges_padding"
-                android:visibility="gone"
+                android:layout_height="match_parent"
                 app:layout_constraintTop_toTopOf="parent">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutHistory"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/common_edges_padding"
+                    >
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvHistory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/your_link_history"
+                        android:textColor="@color/shortly_text_color"
+                        android:textSize="@dimen/bold_text"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvHistory"
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvLinkHistory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/common_vertical_spacing"
+                        tools:listitem="@layout/recyclerview_item"
+                        app:layout_constraintTop_toBottomOf="@+id/tvHistory" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <ProgressBar
+                    android:id="@+id/progressBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/your_link_history"
-                    android:textColor="@color/shortly_text_color"
-                    android:textSize="@dimen/bold_text"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:visibility="gone"
+                    android:layout_gravity="center"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvLinkHistory"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/common_vertical_spacing"
-                    tools:listitem="@layout/recyclerview_item"
-                    app:layout_constraintTop_toBottomOf="@+id/tvHistory" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </FrameLayout>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

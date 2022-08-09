@@ -7,6 +7,8 @@
     <string name="shorten_a_link_here">Shorten a link here...</string>
     <string name="error_text">Please add a link here</string>
     <string name="copy">Copy</string>
+    <string name="copied">Copied</string>
     <string name="timeout_error">Connection Timeout</string>
     <string name="generic_error">Unable to connect! Please try again</string>
+    <string name="history">History</string>
 </resources>

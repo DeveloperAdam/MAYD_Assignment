@@ -4,6 +4,7 @@
     <dimen name="vertical_spacing_text">10dp</dimen>
     <dimen name="common_edges_padding">30dp</dimen>
     <dimen name="card_inside_padding">15dp</dimen>
+    <dimen name="card_to_card_margin">20dp</dimen>
     <dimen name="bold_text">24sp</dimen>
     <dimen name="font_normal">18sp</dimen>
 </resources>

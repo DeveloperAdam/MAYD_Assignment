@@ -12,7 +12,9 @@
     <color name="shortly_text_color">#35323E</color>
     <color name="shortly_bottom_view_bg">#3b3054</color>
     <color name="shortly_btn_color">#2acfcf</color>
-    <color name="shortly_history_screen_bg">#E5E5E5</color>
     <color name="shortly_error_color">#F46262</color>
     <color name="hint_color">#BFBFBF</color>
+
+    <color name="background_color">#F0F1F6</color>
+
 </resources>

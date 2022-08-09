@@ -30,12 +30,11 @@ class ShortlyRepository @Inject constructor(
 
             //Initiate
             emit(DataState.Loading)
-            val url = "shorten?url=$urlToShorten"
-            val response = apiServiceHelper.shortenUrl(url)
-            if (response.isSuccessful){
+            val response = apiServiceHelper.shortenUrl(urlToShorten)
+            if (response.isSuccessful && response.body()?.ok == true){
                 when(response.code()) {
 
-                    HttpURLConnection.HTTP_OK -> { emit(DataState.Success(response.body())) }
+                    HttpURLConnection.HTTP_CREATED -> { emit(DataState.Success(response.body())) }
 
                     HttpURLConnection.HTTP_INTERNAL_ERROR -> emit(DataState.Error(context.getString(R.string.generic_error)))
                     else ->{
