@@ -17,5 +17,6 @@ data class Shortly(
     @SerializedName("full_short_link3") var fullShortLink3: String? = null,
     @SerializedName("share_link") var shareLink: String? = null,
     @SerializedName("full_share_link") var fullShareLink: String? = null,
-    @SerializedName("original_link") var originalLink: String? = null
+    @SerializedName("original_link") var originalLink: String? = null,
+    var isCopied : Boolean = false
 )
