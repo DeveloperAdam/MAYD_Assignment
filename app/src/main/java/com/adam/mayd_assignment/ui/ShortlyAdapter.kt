@@ -7,18 +7,17 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.adam.mayd_assignment.R
 import com.adam.mayd_assignment.data.Shortly
-import com.adam.mayd_assignment.utils.SharePreferenceUtils
 import com.adam.mayd_assignment.utils.ShortlyExtension.applyText
 import com.adam.mayd_assignment.utils.ShortlyExtension.copyToClipboard
 
 
 class ShortlyAdapter(
     arrayListOfUrls: ArrayList<Shortly>,
-    private val context: Context
+    private val context: Context,
+    private val onCallBack: ItemOperation
 ) : RecyclerView.Adapter<ShortlyAdapter.ViewHolder>() {
 
     var mArrayList = arrayListOfUrls
@@ -46,29 +45,15 @@ class ShortlyAdapter(
             }
 
             ivDelete.setOnClickListener {
-                mArrayList.remove(record)
-                SharePreferenceUtils.savePreference(context = context, mArrayList)
-                mArrayList = SharePreferenceUtils.readFromPreference(context = context)
-                notifyItemChanged(index)
+                onCallBack.onDelete(index = index)
             }
             btnCopy.setOnClickListener {
 
-                if (!record.isCopied) {
-                    record.isCopied = true
-                    context.copyToClipboard(tvShortUrl.text.toString().trim())
-                    restoreStates(item = record)
-                }
-
+                onCallBack.onCopy(index = index)
             }
         }
 
-        fun restoreStates(item : Shortly){
-            for(url  in mArrayList)
-            {
-                url.isCopied = item.code == url.code
-            }
-            notifyDataSetChanged()
-        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

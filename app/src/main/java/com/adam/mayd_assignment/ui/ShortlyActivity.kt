@@ -1,5 +1,6 @@
 package com.adam.mayd_assignment.ui
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -16,10 +17,11 @@ import com.adam.mayd_assignment.data.Shortly
 import com.adam.mayd_assignment.mvvm.ShortlyViewModel
 import com.adam.mayd_assignment.utils.DataState
 import com.adam.mayd_assignment.utils.SharePreferenceUtils
+import com.adam.mayd_assignment.utils.ShortlyExtension.copyToClipboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ShortlyActivity : AppCompatActivity(), View.OnClickListener {
+class ShortlyActivity : AppCompatActivity(), View.OnClickListener, ItemOperation {
 
     private lateinit var viewModel: ShortlyViewModel
     private lateinit var etURL: EditText
@@ -55,7 +57,7 @@ class ShortlyActivity : AppCompatActivity(), View.OnClickListener {
 
         //RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        adapter = ShortlyAdapter(listOfShortUrls,this)
+        adapter = ShortlyAdapter(listOfShortUrls,this@ShortlyActivity,this)
         recyclerView.adapter = adapter
         adapter.notifyDataSetChanged()
         clickListeners()
@@ -98,16 +100,7 @@ class ShortlyActivity : AppCompatActivity(), View.OnClickListener {
 
     private fun readFromDB() {
         listOfShortUrls = SharePreferenceUtils.readFromPreference(this)
-        if (listOfShortUrls.size > 0) {
-
-            layoutIntroduction.visibility = View.GONE
-            layoutHistory.visibility = View.VISIBLE
-
-        } else {
-            layoutHistory.visibility = View.GONE
-            layoutIntroduction.visibility = View.VISIBLE
-        }
-
+        setVisibility()
         adapter.updateList(listOfShortUrls)
     }
 
@@ -181,4 +174,47 @@ class ShortlyActivity : AppCompatActivity(), View.OnClickListener {
         etURL.setHintTextColor(ContextCompat.getColor(this, R.color.shortly_error_color))
     }
 
+    override fun onDelete(index: Int) {
+
+        listOfShortUrls.removeAt(index)
+        if(listOfShortUrls.size>0)
+        adapter.updateList(listOfShortUrls)
+        else
+        {
+            SharePreferenceUtils.clearSharePreference(context = this@ShortlyActivity)
+            setVisibility()
+        }
+
+        SharePreferenceUtils.savePreference(context = this@ShortlyActivity, listOfShortUrls)
+    }
+
+    override fun onCopy(index: Int) {
+        val record = listOfShortUrls[index]
+        if (!record.isCopied) {
+            record.isCopied = true
+            this.copyToClipboard(record.fullShortLink.toString())
+            restoreStates(item = record)
+        }
+    }
+
+    private fun restoreStates(item : Shortly){
+
+        for(url  in listOfShortUrls.iterator())
+            url.isCopied = item.code == url.code
+
+        adapter.updateList(listOfShortUrls)
+    }
+
+    private fun setVisibility()
+    {
+        if (listOfShortUrls.size > 0) {
+
+            layoutIntroduction.visibility = View.GONE
+            layoutHistory.visibility = View.VISIBLE
+
+        } else {
+            layoutHistory.visibility = View.GONE
+            layoutIntroduction.visibility = View.VISIBLE
+        }
+    }
 }

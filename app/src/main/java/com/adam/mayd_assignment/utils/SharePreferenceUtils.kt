@@ -38,8 +38,11 @@ object SharePreferenceUtils {
             print(e.printStackTrace())
             arrayListOf()
         }
-
-
+    }
+    fun clearSharePreference(context: Context){
+        val appSharedPrefs: SharedPreferences =
+            context.getSharedPreferences(Pref_Name, Context.MODE_PRIVATE)
+        appSharedPrefs.edit().clear().apply()
     }
 
 }
